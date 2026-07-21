@@ -1,0 +1,15 @@
+geopandas
+ipython
+ipywidgets
+matplotlib
+numpy
+pandas
+pillow
+plotly
+pyvips
+rasterio
+scikit-learn
+scipy
+seaborn
+shapely
+statsmodels
