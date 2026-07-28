@@ -46,6 +46,42 @@ def load_semicolon_csv(path: Path, columns: Optional[Iterable[str]] = None, enco
     raise last_error
 
 
+def export_excel(df, out_path):
+    df.to_csv(
+        out_path,
+        index=False,
+        encoding='utf-8',
+        sep=';',
+        float_format='%.4f',
+        decimal=',',
+    )
+    print("succesfully saved, check export folder")
+
+
+def gini_coefficient(values, weights):
+    values = np.asarray(values, dtype=float)
+    weights = np.asarray(weights, dtype=float)
+    mask = ~(np.isnan(values) | np.isnan(weights) | (weights < 0))
+    values = values[mask]
+    weights = weights[mask]
+    n = len(values)
+    if n == 0 or np.sum(weights) == 0:
+        return np.nan
+    order = np.argsort(values)
+    values = values[order]
+    weights = weights[order]
+    W = np.sum(weights)
+    mu = np.sum(weights * values) / W
+    if mu == 0:
+        return np.nan
+    L = np.cumsum(weights) / W
+    V = np.cumsum(weights * values) / (W * mu)
+    L_prev = np.concatenate([[0], L[:-1]])
+    V_prev = np.concatenate([[0], V[:-1]])
+    area = np.sum((L - L_prev) * (V + V_prev) / 2)
+    return 1 - 2 * area
+
+
 def build_municipality_dataset(output_path: Optional[Path] = None):
     root = find_repo_root()
     data_dir = root / 'data'
