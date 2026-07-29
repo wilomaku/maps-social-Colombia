@@ -4,6 +4,7 @@ CLAUDE.md
 .vscode
 data
 doc
+images
 
 # Ignore Python bytecode files and __pycache__ directories
 __pycache__/
