@@ -3,8 +3,8 @@ CLAUDE.md
 .kilo
 .vscode
 data
-doc
 images
+doc
 
 # Ignore Python bytecode files and __pycache__ directories
 __pycache__/
