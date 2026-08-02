@@ -28,7 +28,7 @@ maps-social-Colombia/
 ├── README.md
 ├── requirements.txt
 ├── doc/
-│   ├── data_dictionary.md — Data description (full batch)
+│   └── data_dictionary.md — Data description (full batch)
 └── src/
     ├── 00_create_municipality_level_analysis.ipynb — Recreates the municipality-level CSV from the Encuesta Multipropósito survey and soil-cover data.
     ├── 10_analisis_usos_suelo.ipynb — Analyzes soil cover evolution (2009–2024) for selected municipalities in Cundinamarca.
@@ -81,6 +81,7 @@ At the start of the project, it was considered a broad set of variables which is
 | `Porc_deficit_vivienda_cuanti` | 4.2 | float64 | Percentage of households in quantitative housing deficit (lack of sufficient quantity of housing services such as water, sanitation, electricity, etc.). | EM2021 – `N_deficit_cuantitativo` |
 
 **EM2021**: Encuesta Multipropósito DANE 2021 [Census Data](https://www.dane.gov.co/index.php/estadisticas-por-tema/pobreza-y-condiciones-de-vida/encuesta-multiproposito)
+**Mapbio**: MapBiomas Data [MapBiomas Colombia Collection](https://plataforma.colombia.mapbiomas.org)
 
 ## Important Notes
 
