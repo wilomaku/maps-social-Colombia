@@ -43,30 +43,22 @@ maps-social-Colombia/
 
 ## Data Processing Workflow
 
-1. **Load Survey Data**: 
-   - Start with `Identificación (Capítulo A).csv` as geographic spine
-   - Filter for Cundinamarca (DPTO == 25)
+1. **Load Data**: Load data from data sources. See notebooks src/00_create_municipality_level_analysis.ipynb src/10_analisis_usos_suelo.ipynb src/20_read_maps.ipynb .
 
-2. **Normalize Municipality Names**:
-   - Convert to lowercase
-   - Remove accents
-   - Strip "cabecera" and "resto" suffixes
-   - Apply manual mappings for known discrepancies
+2. **Data Processing**: The data processing stage included the normalization of municipality names by removing diacritical marks (accents), the aggregation of land-use layers at the municipality and subregional levels, the integration of data from multiple sources, the binarization of selected variables, and the calculation of expansion weights (FEX_C) to account for population representation. See notebooks src/13_create_indexes.ipynb .
+   
 
-3. **Load and Process Soil Data**:
-   - Filter Excel data for Cundinamarca
-   - Normalize municipality names
-   - Calculate land cover shares by class level (0, 1, 2)
-   - Convert 2021 area column to numeric hectares
+2. **EDA**: Using the consolidated dataset, an exploratory data analysis (EDA) was conducted based on the following datasets and analyses:
 
-4. **Aggregate Survey Data**:
-   - Apply survey weights (FEX_C column) which are used to scale individual survey responses to represent the entire target population.
-   - Calculate weighted rates for poverty indicators, service access, demographics
-   - Aggregate to municipality level using survey weights
+   - Temporal evolution of land use for the 20 municipalities of Cundinamarca between 1985 and 2021.
+   - Relationships between land-use indicators (urban growth rate (TCMA), urban population, and population density) and social indicators (monetary poverty, informality, housing deficit, perceptions of corruption and green spaces, and air and water pollution).
+   - Assessment of pairwise correlations and application of Principal Component Analysis (PCA) to land-use, social, and territorial management variables.
 
-5. **Merge Datasets**:
-   - Join survey aggregates with soil characteristics on normalized municipality names
-   - Output final municipality-level dataset
+Following the exploratory analysis, a set of indicators was selected based on previous studies and the indicator framework proposed by the Inter-American Development Bank (IDB), primarily focused on urban sustainability. The indicators were grouped into four categories: land use, territorial management, social inequality, and housing and the built environment. Correlation coefficients were then computed to identify the variables with the greatest relevance for the subsequent modeling stage.
+
+See notebooks src/11_EDA_socioeconomica.ipynb src/12_EDA_usos_suelo_time.ipynb src/30_transicion_pobreza_dispersion_adj.ipynb src/31_analysis_gral_suelo_social.ipynb .
+
+3. **Modeling**: During the modeling phase, an Ordinary Least Squares (OLS) linear regression model was fitted to explain the municipal monetary poverty rate, which served as the response variable. The independent variables were selected based on their statistical significance and correlation analysis and included the urban growth rate (TCMA_URBANO), the Land Use Plan Index (Ind_POT), perceived air pollution, and quantitative housing deficit. See notebooks src/40_model_pobreza.ipynb .
 
 ## Key Variables in Analysis
 
